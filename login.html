@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="style1.css" />
+  
+</head>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <h2>Log in with</h2>
+
+      <div class="login-options">
+        <button class="btn social-btn"><img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="icon"> Google</button>
+        <button class="btn social-btn"><img src="https://www.svgrepo.com/show/475768/apple.svg" alt="Apple" class="icon"> Apple</button>
+      </div>
+
+      <div class="divider"><span>or</span></div>
+
+      <form>
+        <div class="input-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+        </div>
+
+        <div class="forgot">
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn login-btn">Log In</button>
+
+        <div class="signup">
+          Don’t have an account? <a href="#">Sign up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+ <script>document.querySelector('form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  alert('Logged in successfully (demo)');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Methods</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .page-container {
+      width: 90%;
+      max-width: 1000px;
+      padding: 40px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .page-container h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .payment-section {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .payment-box {
+      width: 200px;
+      height: 200px;
+      background-color: #fff;
+      border: 2px solid #2980b9;
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .payment-box img {
+      width: 35px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .payment-box h2 {
+      color: #2980b9;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .payment-box p {
+      font-size: 13px;
+      color: #444;
+    }
+
+    .payment-box:hover {
+      transform: scale(1.05);
+      background-color: #ecf6fb;
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #2980b9;
+      text-decoration: none;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      width: 50%;
+      max-height: 80vh;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal.show {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal h2 {
+      color: #2980b9;
+      margin-bottom: 20px;
+    }
+
+    .modal ul {
+      text-align: left;
+      margin-left: 20px;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .modal li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .modal li img {
+      width: 25px;
+      margin-right: 10px;
+    }
+
+    .modal .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .modal .close-btn:hover {
+      color: #000;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s ease;
+      z-index: 999;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <h1>Payment Methods</h1>
+
+    <div class="payment-section">
+      <!-- Mobile Banking  -->
+      <div class="payment-box" onclick="openMobileBankingModal()">
+        <img src="mbank.jpg" alt="Mobile Banking" />
+        <h2>Mobile Banking</h2>
+        <p>Quick payments using mobile apps.</p>
+     
+        <p>Click here view to Supported Banks</p>
+      </div>
+
+      <!-- Credit Card -->
+      <div class="payment-box">
+        <img src="c1.jpeg" alt="Card" />
+        <h2> Card</h2>
+        <p>We accept Credit Cards,Debit Cards, and more.</p>
+      </div>
+
+      <!-- Bank Transfer (with modal) -->
+      <div class="payment-box" onclick="openBankModal()">
+        <img src="bank.webp" alt="Bank" />
+        <h2>Bank Transfer</h2>
+        <p>Direct deposit to our bank accounts.</p>
+        <p>Click here view to Supported Banks</p>
+       
+      </div>
+    </div>
+
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="closeModal()"></div>
+
+  <!-- (For Mobile Banking click) -->
+  <div class="modal" id="mobileBankingModal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+   
+    <ul>
+      <li>
+        <img src="bkash.webp" alt="bkash" />
+        bkash
+      </li>
+      <li>
+        <img src="nagat.jpg" alt="Nagat" />
+        Nagat
+      </li>
+      <li>
+        <img src="Rocket.png" alt="Rocket" />
+        Rocket
+      </li>
+      <li>
+        <img src="upay.png" alt="upay" />
+        Upay
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bank Modal -->
+  <div class="modal" id="bankModal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Supported Banks</h2>
+    <ul>
+      <li>AB Bank PLC</li>
+      <li>Agrani Bank PLC</li>
+      <li>Bangladesh Commerce Bank Limited</li>
+      <li>Bangladesh Krishi Bank</li>
+      <li>BRAC Bank PLC</li>
+      <li>Prime Bank PLC</li>
+      <li>Sonali Bank PLC</li>
+      <li>Dutch-Bangla Bank PLC</li>
+      <li>IFIC Bank PLC</li>
+      <li>Islami Bank Bangladesh PLC</li>
+    </ul>
+  </div>
+
+  <script>
+    function openMobileBankingModal() {
+      document.getElementById('overlay').classList.add('show');
+      document.getElementById('mobileBankingModal').classList.add('show');
+    }
+
+    function openBankModal() {
+      document.getElementById('overlay').classList.add('show');
+      document.getElementById('bankModal').classList.add('show');
+    }
+
+    function closeModal() {
+      document.getElementById('overlay').classList.remove('show');
+      document.getElementById('mobileBankingModal').classList.remove('show');
+      document.getElementById('bankModal').classList.remove('show');
+    }
+  </script>
+</body>
+</html>
